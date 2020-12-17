@@ -3,12 +3,12 @@ from tqdm import tqdm
 import os
 
 qqmusic = QQ()
-artist = "Eminem"
-start_page = 1
+artist = "Drake"
+start_page = 34
 pages_num = 50
 songs_per_page = 20
 
-LyricFolder = "./lyrics"
+LyricFolder = f"./lyrics_{artist}"
 logFolder = "./log"
 
 if not os.path.exists(LyricFolder):
@@ -21,9 +21,11 @@ def log_error(songmid, name):
     """
     log error
     """
-    with open(f'{logFolder}/errors.log', 'a') as f:
-        
-        f.write(f'[err] {songmid} {name}' + '\n')
+    try:
+        with open(f'{logFolder}/errors.log', 'a') as f:
+            f.write(f'[err] {songmid} {name}' + '\n')
+    except:
+        pass
     
 
 def parse_to_words(lrcline):
@@ -57,7 +59,7 @@ def write_to_file(lyric, filename):
     write lyrics to file
     """
 
-    lrcfile = f'{LyricFolder}/{artist}_{filename}.txt'
+    lrcfile = f'{LyricFolder}/{filename}.txt'
 
     if os.path.exists(lrcfile):
         # return if lyric exists
@@ -88,6 +90,9 @@ async def getLyric():
                 count += 1
             except:
                 log_error(songmid, name)
+        
+        if len(songs) < songs_per_page:
+            break
     
     total = pages_num * songs_per_page
     print(f'success rate is [{count}/{total}]')
