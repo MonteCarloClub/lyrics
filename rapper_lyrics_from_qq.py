@@ -3,12 +3,15 @@ from tqdm import tqdm
 import os
 
 qqmusic = QQ()
-artist = "Drake"
-start_page = 34
+# rapper rank top10:
+# Eminem TravisScott SnoopDogg Drake JuiceWRLD KendrickLamar PostMalone LilUziVert JCole LilWayne
+# rank from https://www.ranker.com/list/most-famous-rappers-right-now/celebrity-lists
+rapper = "LilWayne"
+start_page = 1
 pages_num = 50
 songs_per_page = 20
 
-LyricFolder = f"./lyrics_{artist}"
+LyricFolder = f"./lyrics_{rapper}"
 logFolder = "./log"
 
 if not os.path.exists(LyricFolder):
@@ -43,7 +46,7 @@ def parse_to_words(lrcline):
     if not lrcline[9] == ']':
         return ''
 
-    if lrcline.find(artist) > -1:
+    if lrcline.find(rapper) > -1:
         return ''
 
     if lrcline.find('Written by') > -1:
@@ -78,10 +81,10 @@ async def getLyric():
     count = 0
 
     for page in range(start_page, start_page + pages_num):
-        result = await qqmusic.searchSong(artist, page, songs_per_page)
+        result = await qqmusic.searchSong(rapper, page, songs_per_page)
         songs = result['songs']
         
-        for song in tqdm(songs, desc=f'[({page - start_page:>2}/{pages_num}), {len(songs)} songs]', ncols=120):
+        for song in tqdm(songs, desc=f'[({page - start_page:>2}/{pages_num}), {len(songs):>2} songs]', ncols=120):
             songmid = song['idforres']
             name = song['name']
             try:
