@@ -6,7 +6,7 @@ qqmusic = QQ()
 # rapper rank top10:
 # Eminem TravisScott SnoopDogg Drake JuiceWRLD KendrickLamar PostMalone LilUziVert JCole LilWayne
 # rank from https://www.ranker.com/list/most-famous-rappers-right-now/celebrity-lists
-rapper = "LilWayne"
+rapper = "JuiceWRLD"
 start_page = 1
 pages_num = 50
 songs_per_page = 20
@@ -61,12 +61,20 @@ def write_to_file(lyric, filename):
     """
     write lyrics to file
     """
+    lyric = lyric.strip()
+    if not lyric:
+        return
+    
+    if len(lyric) < 100:
+        return
 
     lrcfile = f'{LyricFolder}/{filename}.txt'
 
     if os.path.exists(lrcfile):
         # return if lyric exists
         return
+
+    lyric = bytes(lyric, 'gbk').decode('utf-8', 'ignore')
 
     with open(lrcfile, 'w') as f:
         # lyric string has \n
