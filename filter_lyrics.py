@@ -1,24 +1,20 @@
 import os
+from settings import songsFolder, filterFolder, lyricsFolder
 
-prefix = 'lyrics_'
+# list all rappers.txt
+for rapper_txt in os.listdir(songsFolder):
+    # get rapper name
+    rapper = rapper_txt[:-4]
 
-for name in os.listdir('.'):
-    # list folders in current dir
-    if os.path.isdir(os.path.join(f'./{name}')) and name.startswith(prefix):
-        # if folder'name start with 'lyrics_'
-        # get artist's name
-        artist = name[len(prefix):]
+    # create destination folder for rapper
+    destination = f'{filterFolder}/{rapper}'
+    if not os.path.exists(destination):
+        os.mkdir(destination)
 
-        # create output file according to artist's name
-        with open(f'./filter_{artist}.txt', 'w') as f:
-            count = 0
-            for filename in os.listdir(f'./{name}'):
-                # get lyric file's name
-                try:
-                    # output to file
-                    f.write(filename + '\n')
-                    count += 1
-                except:
-                    pass
-            
-            print(count)
+    with open(f'{songsFolder}/{rapper_txt}', 'r', encoding='utf-8') as songsfile:
+        # get content in song name file
+        songnames = songsfile.readlines()
+        for songname in songnames:
+            # del '\n'
+            songname = songname[:-1]
+            os.rename(f"{lyricsFolder}/{rapper}/{songname}", f"{destination}/{songname}")

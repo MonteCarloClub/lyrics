@@ -1,6 +1,8 @@
 .vscode
-lyrics_*
+lyrics
+filter
+songs
 log
 __pycache__
 
-local_*
+zlocal_*

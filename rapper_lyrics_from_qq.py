@@ -1,5 +1,6 @@
 from creepers.qq import QQ
 from tqdm import tqdm
+from settings import lyricsFolder
 import os
 
 qqmusic = QQ()
@@ -11,12 +12,14 @@ start_page = 1
 pages_num = 50
 songs_per_page = 20
 
-LyricFolder = f"./lyrics_{rapper}"
-logFolder = "./log"
+if not os.path.exists(lyricsFolder):
+    os.mkdir(lyricsFolder)
 
+LyricFolder = f"{lyricsFolder}/{rapper}"
 if not os.path.exists(LyricFolder):
     os.mkdir(LyricFolder)
 
+logFolder = "./log"
 if not os.path.exists(logFolder):
     os.mkdir(logFolder)
 
@@ -25,7 +28,7 @@ def log_error(songmid, name):
     log error
     """
     try:
-        with open(f'{logFolder}/errors.log', 'a') as f:
+        with open(f'{logFolder}/errors.log', 'a', encoding='utf-8') as f:
             f.write(f'[err] {songmid} {name}' + '\n')
     except:
         pass
@@ -68,15 +71,16 @@ def write_to_file(lyric, filename):
     if len(lyric) < 100:
         return
 
+    # filename = bytes(filename, 'gbk').decode('utf-8', 'ignore')
     lrcfile = f'{LyricFolder}/{filename}.txt'
 
     if os.path.exists(lrcfile):
         # return if lyric exists
         return
 
-    lyric = bytes(lyric, 'gbk').decode('utf-8', 'ignore')
+    # lyric = bytes(lyric, 'gbk').decode('utf-8', 'ignore')
 
-    with open(lrcfile, 'w') as f:
+    with open(lrcfile, 'w', encoding='utf-8') as f:
         # lyric string has \n
         lines = lyric.split('\n')
         for line in lines:
