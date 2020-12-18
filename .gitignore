@@ -6,3 +6,6 @@ log
 __pycache__
 
 zlocal_*
+local_*
+
+deduplicator/main
