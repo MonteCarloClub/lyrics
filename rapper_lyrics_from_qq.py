@@ -2,12 +2,11 @@ from creepers.qq import QQ
 from tqdm import tqdm
 from settings import lyricsFolder
 import os
+import sys
 
 qqmusic = QQ()
-# rapper rank top10:
-# Eminem TravisScott SnoopDogg Drake JuiceWRLD KendrickLamar PostMalone LilUziVert JCole LilWayne
-# rank from https://www.ranker.com/list/most-famous-rappers-right-now/celebrity-lists
-rapper = "JuiceWRLD"
+# get rapper in cmd
+rapper = "JuiceWRLD" if len(sys.argv) == 1 else sys.argv[-1]
 start_page = 1
 pages_num = 50
 songs_per_page = 20
