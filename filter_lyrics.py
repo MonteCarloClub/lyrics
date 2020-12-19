@@ -17,4 +17,10 @@ for rapper_txt in os.listdir(songsFolder):
         for songname in songnames:
             # del '\n'
             songname = songname[:-1]
-            os.rename(f"{lyricsFolder}/{rapper}/{songname}", f"{destination}/{songname}")
+            source = f"{lyricsFolder}/{rapper}/{songname}"
+            # file not exists
+            if not os.path.exists(source):
+                print(rapper, songname)
+                continue
+            # move file
+            os.rename(source, f"{destination}/{songname}")

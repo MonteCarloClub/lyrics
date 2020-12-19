@@ -17,4 +17,4 @@ for rapper in os.listdir(lyricsFolder):
                 except:
                     print(songname)
 
-        print(count)
+        print(f'{rapper} has {count}')

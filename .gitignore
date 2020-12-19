@@ -8,3 +8,4 @@ zlocal_*
 local_*
 
 deduplicator/main
+raw

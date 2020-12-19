@@ -36,5 +36,5 @@ if __name__ == "__main__":
         'LilWayne'
     ]
 
-    download_rappers(rank[:2])
-    # download_rappers(rank[5:])
+    # download_rappers(rank[:5])
+    download_rappers(rank[5:])
