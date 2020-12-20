@@ -8,4 +8,5 @@ zlocal_*
 local_*
 
 deduplicator/main
+sorted-*
 raw
