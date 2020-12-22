@@ -13,8 +13,7 @@ for line in sys.stdin:
     # parse the input we got from mapper.py
     composite_word, num = line.split('\t')
 
-    # because Hadoop sorts map output by key (here: num|word)
-    # before it is passed to the reducer
+    # because Hadoop sorts map output by composite_word
     print '%s\t%s' % (composite_word, num)
 
     try:
@@ -23,4 +22,5 @@ for line in sys.stdin:
     except ValueError:
         pass
 
+# write total num of words to output file
 print 'num of words is %s' % (count)

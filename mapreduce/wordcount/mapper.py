@@ -16,4 +16,4 @@ for line in sys.stdin:
         # if word is not empty
         if word:
             # write (key, value) to STDOUT, as the input for reducers
-            print '%s\t%s' % (word.strip(punctuation), 1)
+            print '%s\t%s' % (word, 1)
